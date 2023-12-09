@@ -1,10 +1,8 @@
 # CT_G42_unibot
 ## TO-DO
-- Rewrite the catcher conditionals in the case that the detector fails to detect a topic
 - Add more words so that the detector can more reliably detect topics
 - Add in the actual datasets so we have full functionality
-- Fix the issue where the tree parser prints an additional line after finishing in some cases
-- For some reason when parsing through the tree the user input starts with "None", needs to be fixed
+- Add a quit option
 
 ##  CHANGES
 - The tree parser is largely different from the pseudocode and flowchart version as I didn't expect to meet some difficulties
