@@ -61,16 +61,16 @@ def tree_parser(data:dict) -> None:
         """
         tree: dict = data
         for key in tree:
-            print(key)
-            user_choice = input(print("Please type yes or no ")).lower()
-            if user_choice in tree[key]:
-                if user_choice == "yes" and type(tree[key]["yes"]) == dict:
-                    tree_parser(tree[key]["yes"])
-                if user_choice == "no" and type(tree[key]["no"]) == dict:
-                    tree_parser(tree[key]["no"])
-                else:
-                    print(tree[key][user_choice])
-                    break
+                #learprint(key)
+                user_choice = input(print("Please type yes or no ")).lower()
+                if user_choice in tree[key]:
+                        if user_choice == "yes" and type(tree[key]["yes"]) == dict:
+                                tree_parser(tree[key]["yes"])
+                        if user_choice == "no" and type(tree[key]["no"]) == dict:
+                                tree_parser(tree[key]["no"])
+                        else:
+                                print(tree[key][user_choice])
+                                break
 
                 
 #Start of the main loop
@@ -103,7 +103,5 @@ elif output == "study":
 elif output == "social": 
         tree_parser(study_data)
         output = "Thank you for your chat"
-else:
-        output = "Critical failure, rerun the unibot"
 
 print(output)
