@@ -48,3 +48,26 @@ topic_words: dict[str, set[str]] = {
                 "society", "societies",
         },
 }
+
+# Structure:
+# { "Question/Prompt" : { "answer1" : {...}, "answer2": {...}}
+# {...} is the recurvice structure
+# answer always in lowercase
+# "Prompt" : { } is a leaf
+
+study_questions = {
+"For students like you, sometimes there are specific areas that can be challenging. Is there anything in your studies you are struggling with?" :
+{
+    "yes" : {"Would you like to share your struggles with other students who might be facing similar challenges?":
+                    {
+                    "yes": {"That's great! Perhaps forming a study group could be beneficial. It's a wonderful way to collaborate and tackle these challenges together.": {}},
+                    "no" : {"That's completely understandable. Perhaps seeking guidance from the student advisor could be helpful. They are here to support you with your academic challenges.": {}}
+                    }
+
+            },
+    "no" : {"If you are looking for practical information or you have other questions? The Student Desk's contact form is a useful resource for specific inquiries, beyond academic challenges.": {}}
+}
+}# study_question
+
+sport_questions = {}
+social_questions = {}

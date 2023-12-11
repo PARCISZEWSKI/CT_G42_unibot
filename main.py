@@ -6,30 +6,9 @@ Main dev: Anton Arciszewski
 import string
 from collections.abc import Iterable
 from collections import namedtuple
-from topics import topic_words
 
-#Example Dataset
-# Structure:
-# { "Question/Prompt" : { "answer1" : {...}, "answer2": {...}}
-# {...} is the recurvice structure
-# answer always in lowercase
-# "Prompt" : { } is a leaf
-study_questions = {
-        "I asses that you are stuggling, is that correct?" :
-                {
-                        "yes" : {"Maybe sharing your problem with others could help you. Do you agree?":
-                                        {
-                                        "yes": {"TODO": {}},
-                                        "no" : {"I suggest you take an appointment with your student advisor.": {}}
-                                        }
+from topics import topic_words, study_questions, sport_questions, social_questions
 
-                                },
-                        "no" : {"In that case you can visit the schools study page at this link: xxxxxxxxxxx": {}}
-                }
-}
-
-sport_questions = {}
-social_questions = {}
 
 questions_tree = {
     "study": study_questions,
@@ -47,6 +26,7 @@ def prompt(msg: str, choices=[], reply=True) -> str:
                 print(f"> {c}")
         if len(choices) > 0:
                 print(f"UNIBOT: Select one option: ")
+
         if reply:
                 return input("YOU: ")
 
