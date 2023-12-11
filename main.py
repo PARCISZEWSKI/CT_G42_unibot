@@ -2,8 +2,11 @@
 Main program file for the unibot project
 Main dev: Anton Arciszewski
 """
-from collections import namedtuple
 
+import string
+from collections.abc import Iterable
+from collections import namedtuple
+from topics import topic_words
 
 #Example Dataset
 # Structure:
@@ -35,13 +38,6 @@ questions_tree = {
 } # questions_tree
 
 
-#Example topic detection sequence
-topic_associations: dict[str, set[str]] = {
-        "study": {"study", "learn", "math", "science", "struggle", "lesson", "lecture"},
-        "sport": {"sport", "endurance", "boxing", "running", "soccer", "football"},
-        "social": {"social", "community", "event", "christmas", "toghether"},
-}
-
 def prompt(msg: str, choices=[], reply=True) -> str:
         """
         Format the prompt.
@@ -54,18 +50,29 @@ def prompt(msg: str, choices=[], reply=True) -> str:
         if reply:
                 return input("YOU: ")
 
-def topic_detector(user_input: str) -> str:
+def remove_punctuation(text: str) -> str:
+        """
+        Replace the punctuation characters with ''
+        """
+        return "".join(" " if c in string.punctuation else c for c in text)
+
+
+def topic_detector(user_input: str, wordbag: dict[str, Iterable]) -> str:
         """
         Select the topic that the largest quantity of words match to, returns it
         """
-        global topic_associations
 
-        topic_counter: dict[str, int] = {topic: 0 for topic in topic_associations}
+        topic_counter: dict[str, int] = {topic: 0 for topic in wordbag}
 
-        input_refined: list[str] = (user_input.lower()).split()
+        # Refine the user's input in order to compare with the topic words.
+        user_input = user_input.lower()
+        user_input = remove_punctuation(user_input)
+        input_refined: list[str] = user_input.split()
+
+        # Count the matched words per topics.
         for word in input_refined:
-                for topic in topic_associations:
-                        if word in topic_associations[topic]:
+                for topic in wordbag:
+                        if word in wordbag[topic]:
                                 topic_counter[topic] += 1
 
         #Sorts the dictionary keys as tuples by their values
@@ -114,7 +121,7 @@ def main() -> None:
         # and we move into the manual user selection
         while (counter_fail < 3):
                 user_reply: str = prompt(question)
-                topic: str = topic_detector(user_reply)
+                topic: str = topic_detector(user_reply, topic_words)
                 if topic:
                         tree = questions_tree[topic]
                         tree_parser(tree)

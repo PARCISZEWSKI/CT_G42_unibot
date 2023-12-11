@@ -1,6 +1,5 @@
 # CT_G42_unibot
 ## TO-DO
-- Add more words so that the detector can more reliably detect topics
 - Add in the actual datasets so we have full functionality
 - Add a quit option
 
