@@ -2,31 +2,13 @@
 Main program file for the unibot project
 Main dev: Anton Arciszewski
 """
+
+import string
+from collections.abc import Iterable
 from collections import namedtuple
 
+from topics import topic_words, study_questions, sport_questions, social_questions
 
-#Example Dataset
-# Structure:
-# { "Question/Prompt" : { "answer1" : {...}, "answer2": {...}}
-# {...} is the recurvice structure
-# answer always in lowercase
-# "Prompt" : { } is a leaf
-study_questions = {
-        "I asses that you are stuggling, is that correct?" :
-                {
-                        "yes" : {"Maybe sharing your problem with others could help you. Do you agree?":
-                                        {
-                                        "yes": {"TODO": {}},
-                                        "no" : {"I suggest you take an appointment with your student advisor.": {}}
-                                        }
-
-                                },
-                        "no" : {"In that case you can visit the schools study page at this link: xxxxxxxxxxx": {}}
-                }
-}
-
-sport_questions = {}
-social_questions = {}
 
 questions_tree = {
     "study": study_questions,
@@ -34,13 +16,6 @@ questions_tree = {
     "social": social_questions,
 } # questions_tree
 
-
-#Example topic detection sequence
-topic_associations: dict[str, set[str]] = {
-        "study": {"study", "learn", "math", "science", "struggle", "lesson", "lecture"},
-        "sport": {"sport", "endurance", "boxing", "running", "soccer", "football"},
-        "social": {"social", "community", "event", "christmas", "toghether"},
-}
 
 def prompt(msg: str, choices=[], reply=True) -> str:
         """
@@ -51,21 +26,33 @@ def prompt(msg: str, choices=[], reply=True) -> str:
                 print(f"> {c}")
         if len(choices) > 0:
                 print(f"UNIBOT: Select one option: ")
+
         if reply:
                 return input("YOU: ")
 
-def topic_detector(user_input: str) -> str:
+def remove_punctuation(text: str) -> str:
+        """
+        Replace the punctuation characters with ''
+        """
+        return "".join(" " if c in string.punctuation else c for c in text)
+
+
+def topic_detector(user_input: str, wordbag: dict[str, Iterable]) -> str:
         """
         Select the topic that the largest quantity of words match to, returns it
         """
-        global topic_associations
 
-        topic_counter: dict[str, int] = {topic: 0 for topic in topic_associations}
+        topic_counter: dict[str, int] = {topic: 0 for topic in wordbag}
 
-        input_refined: list[str] = (user_input.lower()).split()
+        # Refine the user's input in order to compare with the topic words.
+        user_input = user_input.lower()
+        user_input = remove_punctuation(user_input)
+        input_refined: list[str] = user_input.split()
+
+        # Count the matched words per topics.
         for word in input_refined:
-                for topic in topic_associations:
-                        if word in topic_associations[topic]:
+                for topic in wordbag:
+                        if word in wordbag[topic]:
                                 topic_counter[topic] += 1
 
         #Sorts the dictionary keys as tuples by their values
@@ -114,7 +101,7 @@ def main() -> None:
         # and we move into the manual user selection
         while (counter_fail < 3):
                 user_reply: str = prompt(question)
-                topic: str = topic_detector(user_reply)
+                topic: str = topic_detector(user_reply, topic_words)
                 if topic:
                         tree = questions_tree[topic]
                         tree_parser(tree)
