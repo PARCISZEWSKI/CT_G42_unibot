@@ -1,6 +1,6 @@
 """
 Main program file for the unibot project
-Main dev: Anton Arciszewski
+Main dev: Anton Arciszewski, Omar Rampado
 """
 
 import string
@@ -21,14 +21,21 @@ def prompt(msg: str, choices=[], reply=True) -> str:
         """
         Format the prompt.
         """
+        # ensure indexing
+        choices = list(choices)
         print(f"UNIBOT: {msg}")
-        for c in choices:
-                print(f"> {c}")
+        for i,c in enumerate(choices):
+                print(f"{i+1}) {c}")
         if len(choices) > 0:
-                print(f"UNIBOT: Select one option: ")
+                print(f"UNIBOT: Select one option (number or text).")
 
         if reply:
-                return input("YOU: ")
+                user_choice: str = input("YOU: ")
+                # Number selection.
+                if user_choice.isdigit():
+                    return choices[int(user_choice)-1]
+                # Text selection.
+                return user_choice
 
 def remove_punctuation(text: str) -> str:
         """
