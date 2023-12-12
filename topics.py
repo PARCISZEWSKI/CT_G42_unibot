@@ -15,7 +15,7 @@ topic_words: dict[str, set[str]] = {
                 "math", "science"
         },
         "sport": {
-                "sport", "spots",
+                "sport", "sports",
                 "play", "playing",
                 "workout", "workouts",
                 "endurance",
@@ -42,7 +42,7 @@ topic_words: dict[str, set[str]] = {
                 "friend", "friends",
                 "association", "associations",
                 "art", "arts",
-                "paint", "painting", "paitings",
+                "paint", "painting", "paintings",
                 "music", "musics",
                 "listen", "listening",
                 "society", "societies",
@@ -61,7 +61,7 @@ study_questions = {
 "yes" : {"Would you like to share your struggles with other students who might be facing similar challenges?":
     {
     "yes": {"That's great! Perhaps forming a study group could be beneficial. It's a wonderful way to collaborate and tackle these challenges together.": {}},
-    "no" : {"That's completely understandable. Perhaps seeking guidance from the student advisor could be helpful. They are here to support you with your academic challenges.(LINK NEEDED)": {}}
+    "no" : {"That's completely understandable. Perhaps seeking guidance from the student advisor could be helpful. They are here to support you with your academic challenges: https://vu.nl/nl/student/contact-en-studentbegeleiding/studieadviseur": {}}
     }
 
         },
