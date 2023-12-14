@@ -37,7 +37,7 @@ topic_words: dict[str, set[str]] = {
                 "community", "communities",
                 "event", "events",
                 "christmas",
-                "toghether",
+                "together",
                 "person", "people",
                 "friend", "friends",
                 "association", "associations",
@@ -69,7 +69,6 @@ study_questions = {
 }
 }# study_question
 
-# FIXME review
 sport_questions = {
  "Are you interested in a specific sport already, or are you looking to explore and try something new?" :
  {
@@ -108,11 +107,11 @@ sport_questions = {
             }
         }},
        "dance sports" : { "That’s great! I recommend you to take a look at Zumba.": {}},
-       "individual ball sports" : {"That’s great! i recommend you to take a look at tennis!":{}},
+       "individual ball sports" : {"That’s great! I recommend you to take a look at tennis!":{}},
        "fight sports" : {
            "Do you like to grapple or do you like to strike?":
              {
-            "grapple" : {"That’s great, i recommend you to take a look at aikido!": {}},
+            "grapple" : {"That’s great, I recommend you to take a look at aikido!": {}},
             "strike": {"That’s great, I recommend you to take a look at karate!":  {}},
              }
         },
@@ -120,7 +119,7 @@ sport_questions = {
        "water sports" : {"Do you prefer water sports with a ball or without?":
              {
              "without" : {"That’s great, I recommend you to take a look at swimming!": {}},
-             "with" : {"That’s great, i recommend you to take a look at waterpolo!": {}}
+             "with" : {"That’s great, I recommend you to take a look at waterpolo!": {}}
              }
         },
  }}
@@ -128,7 +127,6 @@ sport_questions = {
  }# sport question
 
 
-# FIXME review
 social_questions = {
 "Are you more interested in upcoming events happening around campus or joining a student association to engage in regular social activities?" :
 {
