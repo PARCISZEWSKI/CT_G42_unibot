@@ -101,6 +101,9 @@ def main() -> None:
         Main loop
         """
 
+        # Greeting
+        print("Hello, I'm UniBot, the student virtual assistant chatbot at VU Amsterdam.")
+
         counter_fail: int = 0
         question: str = "What can I help you with? "
         # Check if the detector function found a topic,
